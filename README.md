@@ -1,4 +1,6 @@
-# MeshCore-Cardputer-ADV
+ MeshCore-Cardputer-ADV
+
+<a href="https://buymeacoffee.com/stachu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Enhanced TFT user interface for MeshCore mesh networking firmware, optimized for M5Stack Cardputer-Adv.
 
