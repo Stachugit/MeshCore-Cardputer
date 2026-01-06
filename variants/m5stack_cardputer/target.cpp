@@ -6,9 +6,19 @@ M5CardputerBoard board;
 static SPIClass spi;
 RADIO_CLASS radio = new Module(P_LORA_NSS, P_LORA_DIO_1, P_LORA_RESET, P_LORA_BUSY, spi, SPISettings());
 
-// RF switch control pins
-static const int RXEN_PIN = P_LORA_RXEN;
-static const int TXEN_PIN = P_LORA_TXEN;
+// RF switch control pins (only for modules with external RF switch like DX-LR30)
+#ifdef P_LORA_RXEN
+  static const int RXEN_PIN = P_LORA_RXEN;
+#else
+  static const int RXEN_PIN = -1;  // Not used
+#endif
+
+#ifdef P_LORA_TXEN
+  static const int TXEN_PIN = P_LORA_TXEN;
+#else
+  static const int TXEN_PIN = -1;  // Not used
+#endif
+
 WRAPPER_CLASS radio_driver(radio, board);
 
 ESP32RTCClock fallback_clock;
@@ -28,14 +38,18 @@ bool radio_init() {
   fallback_clock.begin();
   rtc_clock.begin(Wire);
   
-  // Configure RF switch pins
-  pinMode(RXEN_PIN, OUTPUT);
-  pinMode(TXEN_PIN, OUTPUT);
-  digitalWrite(RXEN_PIN, LOW);
-  digitalWrite(TXEN_PIN, LOW);
-  
-  // Set RF switch control function
-  radio.setRfSwitchPins(RXEN_PIN, TXEN_PIN);
+  // Configure RF switch pins only if using external RF switch
+  #if defined(P_LORA_RXEN) && defined(P_LORA_TXEN)
+    pinMode(RXEN_PIN, OUTPUT);
+    pinMode(TXEN_PIN, OUTPUT);
+    digitalWrite(RXEN_PIN, LOW);
+    digitalWrite(TXEN_PIN, LOW);
+    
+    // Set RF switch control function
+    radio.setRfSwitchPins(RXEN_PIN, TXEN_PIN);
+  #endif
+  // For modules with integrated RF switch (like Cap LoRa868), 
+  // SX126X_DIO2_AS_RF_SWITCH=true handles switching automatically
   
   return radio.std_init(&spi);
 }
