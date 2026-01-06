@@ -7,6 +7,12 @@ Enhanced TFT user interface for MeshCore mesh networking firmware, optimized for
 ![MeshCore-Cardputer-ADV](docs/images/title.JPG)
 *Custom TFT UI for M5Stack Cardputer-Adv with DX-LR30-900M22SP LoRa module*
 
+## 🆕 Cap LoRa868 Support
+
+**Now supports M5Stack Cap LoRa868!** This project includes a dedicated build configuration for the official M5Stack LoRa868 Cap module (based on RA-01SH/SX1262). See the [Building & Flashing](#building--flashing) section for details.
+
+- [Cap LoRa868 Documentation](https://docs.m5stack.com/en/cap/Cap_LoRa868)
+
 ##  Features
 
 ###  Modern Chat Interface
@@ -43,15 +49,28 @@ Enhanced TFT user interface for MeshCore mesh networking firmware, optimized for
 ### Hardware
 - **Device**: M5Stack Cardputer-Adv (ESP32-S3)
 - **Display**: 240x135 TFT
-- **LoRa Module**: DX-LR30-900M22SP (based on SX1262 chip)
+- **LoRa Module**: 
+  - DX-LR30-900M22SP (based on SX1262 chip) - custom wiring required
+  - **M5Stack Cap LoRa868** (RA-01SH/SX1262) - plug-and-play solution
 
 ### Software
 - **Build System**: PlatformIO
 - **Initial Setup**: MeshCore mobile app (for configuration)
 
-##  LoRa Module Wiring
+##  LoRa Module Options
 
-The project uses the **DX-LR30-900M22SP** LoRa module (SX1262 chipset). Connect as follows:
+### Option 1: M5Stack Cap LoRa868 (Recommended for Beginners)
+
+The **M5Stack Cap LoRa868** is an official accessory that connects directly to the Cardputer-Adv without any custom wiring. Simply attach it to the back of your Cardputer-Adv.
+
+- **Module**: RA-01SH (SX1262 chipset)
+- **Frequency**: 863-870 MHz (EU868)
+- **Documentation**: [Cap LoRa868 Docs](https://docs.m5stack.com/en/cap/Cap_LoRa868)
+- **Advantage**: No soldering or voltage conversion needed
+
+### Option 2: DX-LR30-900M22SP (Custom Build)
+
+For advanced users who want a custom build, the **DX-LR30-900M22SP** module (SX1262 chipset) can be used with custom wiring:
 
 ![LoRa Module](docs/images/lora-module.jpg)
 *DX-LR30-900M22SP LoRa Module (SX1262)*
@@ -91,13 +110,31 @@ You have two options:
 
 ##  Building & Flashing
 
+### Pre-compiled Binaries (Recommended)
+
+**Ready-to-flash .bin files are available in [Releases](https://github.com/Stachugit/MeshCore-Cardputer-ADV/releases):**
+
+- `firmware_Cap_LoRa868.bin` - For M5Stack Cap LoRa868
+- `firmware_DX-LR30.bin` - For custom DX-LR30-900M22SP module
+
+Flash using your preferred tool (esptool.py, ESP Flash Download Tool, or web flasher).
+
+### Building from Source
+
+### For Custom DX-LR30-900M22SP Module:
 ```bash
 # Clone the repository
 git clone https://github.com/Stachugit/MeshCore-Cardputer-ADV.git
 cd MeshCore-Cardputer-ADV
 
 # Build and upload
-pio run -e m5stack_cardputer_companion_headless --target upload
+pio run -e CardputerADV_keyboard_UI --target upload
+```
+
+### For M5Stack Cap LoRa868:
+```bash
+# Build and upload for Cap LoRa868
+pio run -e CardputerADV_keyboard_UI_Cap_LoRa868 --target upload
 ```
 
 ##  Initial Setup
@@ -221,6 +258,7 @@ Contributions are welcome! Feel free to:
 
 - Original MeshCore: [[Link](https://github.com/meshcore-dev/MeshCore)]
 - M5Stack Cardputer-ADV: https://shop.m5stack.com/products/m5stack-cardputer-adv-version-esp32-s3
+- M5Stack Cap LoRa868: https://docs.m5stack.com/en/cap/Cap_LoRa868
 - Cardputer-Adv 3.3V Mod: https://www.reddit.com/r/CardPuter/comments/1pjlkby/cardputer_adv_33v_mod/
 
 ##  Disclaimer
