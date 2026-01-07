@@ -38,6 +38,14 @@ bool radio_init() {
   fallback_clock.begin();
   rtc_clock.begin(Wire);
   
+  // Hardware reset sequence for LoRa module
+  // This ensures proper initialization even if module is connected after power-on
+  pinMode(P_LORA_RESET, OUTPUT);
+  digitalWrite(P_LORA_RESET, LOW);   // Assert reset
+  delay(10);                          // Hold for 10ms
+  digitalWrite(P_LORA_RESET, HIGH);  // Release reset
+  delay(100);                         // Wait for module to boot (SX1262 needs ~50ms)
+  
   // Configure RF switch pins only if using external RF switch
   #if defined(P_LORA_RXEN) && defined(P_LORA_TXEN)
     pinMode(RXEN_PIN, OUTPUT);
