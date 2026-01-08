@@ -1,7 +1,9 @@
 # 🔥 **MeshCore-Cardputer-ADV** - **NOW ON M5Burner!** 🔥
 
 **Search on M5Burner:**
+⚠️Experimental, might not work⚠️
 - `MeshCore-Cardputer-ADV M5Stack Cap LoRa868 version!!!!`
+   
 - `MeshCore-Cardputer-ADV DX-LR30 version (check github for more info)`
 
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=Stachu&button_colour=ff8800&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00)](https://buymeacoffee.com/Stachu)
@@ -10,12 +12,6 @@ Enhanced TFT user interface for MeshCore mesh networking firmware, optimized for
 
 ![MeshCore-Cardputer-ADV](docs/images/title.JPG)
 *Custom TFT UI for M5Stack Cardputer-Adv with DX-LR30-900M22SP LoRa module*
-
-## 🆕 Cap LoRa868 Support
-
-**Now supports M5Stack Cap LoRa868!** This project includes a dedicated build configuration for the official M5Stack LoRa868 Cap module (based on RA-01SH/SX1262). See the [Building & Flashing](#building--flashing) section for details.
-
-- [Cap LoRa868 Documentation](https://docs.m5stack.com/en/cap/Cap_LoRa868)
 
 ##  Features
 
